@@ -6,20 +6,29 @@ import (
 )
 
 type Options struct {
-	C          bool
-	U          bool
-	I          bool
-	D          bool
-	InputFile  string
-	OutputFile string
-	F          int
-	S          int
+	C bool
+	U bool
+	I bool
+	D bool
+	F int
+	S int
 }
 
 func New() *Options {
 	return &Options{}
 }
-
+func ParseFilePath() (inputFileName string, outputFileName string) {
+	args := flag.Args()
+	switch len(args) {
+	case 0:
+	case 1:
+		inputFileName = args[0]
+	case 2:
+		inputFileName = args[0]
+		outputFileName = args[1]
+	}
+	return inputFileName, outputFileName
+}
 func (opt *Options) Init() {
 	flag.IntVar(&opt.F, "f", 0, "Provide -f key")
 	flag.IntVar(&opt.S, "s", 0, "Provide -s key")
@@ -27,8 +36,6 @@ func (opt *Options) Init() {
 	flag.BoolVar(&opt.U, "u", false, "Provide -u key")
 	flag.BoolVar(&opt.I, "i", false, "Provide -i key")
 	flag.BoolVar(&opt.D, "d", false, "Provide -d key")
-	flag.StringVar(&opt.InputFile, "input_file", "", "Provide -input_file key")
-	flag.StringVar(&opt.OutputFile, "output_file", "", "Provide -output_file key")
 	flag.Parse()
 }
 
