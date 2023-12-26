@@ -17,6 +17,7 @@ type Options struct {
 func New() *Options {
 	return &Options{}
 }
+
 func ParseFilePath() (inputFileName string, outputFileName string) {
 	args := flag.Args()
 	switch len(args) {
@@ -29,6 +30,7 @@ func ParseFilePath() (inputFileName string, outputFileName string) {
 	}
 	return inputFileName, outputFileName
 }
+
 func (opt *Options) Init() {
 	flag.IntVar(&opt.F, "f", 0, "Provide -f key")
 	flag.IntVar(&opt.S, "s", 0, "Provide -s key")

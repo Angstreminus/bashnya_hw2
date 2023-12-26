@@ -9,8 +9,7 @@ func GetUniqStrings(inputPrep []string) []string {
 	uniqPrep := make(map[string]struct{}, 0)
 	var resStr []string
 	for _, elem := range inputPrep {
-		_, ok := uniqPrep[elem]
-		if !ok {
+		if _, ok := uniqPrep[elem]; !ok {
 			resStr = append(resStr, elem)
 			uniqPrep[elem] = struct{}{}
 		}
@@ -29,8 +28,7 @@ func GetPrepCount(inputPrep []string) map[string]int {
 func GetPrepInput(input, prep []string) map[string]string {
 	mapPrepInput := make(map[string]string, 0)
 	for idx, elem := range prep {
-		_, ok := mapPrepInput[elem]
-		if !ok {
+		if _, ok := mapPrepInput[elem]; !ok {
 			mapPrepInput[elem] = input[idx]
 		}
 	}
@@ -73,8 +71,7 @@ func ParamS(input *[]string, num int) []string {
 func ParamC(prepUniqStr []string, prepCnt map[string]int, prepInput map[string]string) []string {
 	var resStr []string
 	for _, elem := range prepUniqStr {
-		_, ok := prepInput[elem]
-		if !ok {
+		if _, ok := prepInput[elem]; !ok {
 			continue
 		}
 		var sb strings.Builder
@@ -89,8 +86,7 @@ func ParamC(prepUniqStr []string, prepCnt map[string]int, prepInput map[string]s
 func ParamD(prepUniqStr []string, prepCnt map[string]int, prepInput map[string]string) []string {
 	var resStr []string
 	for _, elem := range prepUniqStr {
-		_, ok := prepInput[elem]
-		if ok && (prepCnt[elem] > 1) {
+		if _, ok := prepInput[elem]; ok && (prepCnt[elem] > 1) {
 			resStr = append(resStr, prepInput[elem])
 		}
 	}
@@ -100,8 +96,7 @@ func ParamD(prepUniqStr []string, prepCnt map[string]int, prepInput map[string]s
 func ParamU(prepUniqStr []string, prepCnt map[string]int, prepInput map[string]string) []string {
 	var resStr []string
 	for _, elem := range prepUniqStr {
-		_, ok := prepInput[elem]
-		if ok && prepCnt[elem] == 1 {
+		if _, ok := prepInput[elem]; ok && prepCnt[elem] == 1 {
 			resStr = append(resStr, prepInput[elem])
 		}
 	}
@@ -112,8 +107,7 @@ func Unify(input, prep []string) []string {
 	var resStr []string
 	uniqStrings := make(map[string]string, 0)
 	for idx, elem := range prep {
-		_, ok := uniqStrings[elem]
-		if !ok {
+		if _, ok := uniqStrings[elem]; !ok {
 			resStr = append(resStr, input[idx])
 			uniqStrings[elem] = input[idx]
 		}
