@@ -1,6 +1,9 @@
 package flow
 
-import "testing"
+import (
+	"testing"
+	"uniq/internal/options"
+)
 
 func Benchmark1(b *testing.B) {
 	lineInput := []string{
@@ -19,6 +22,7 @@ func Benchmark1(b *testing.B) {
 }
 
 func Benchmark2(b *testing.B) {
+	opt := options.New()
 	lineInput := []string{
 		"I love music.",
 		"I love music.",
@@ -29,7 +33,6 @@ func Benchmark2(b *testing.B) {
 		"Thanks.",
 	}
 	for i := 0; i < b.N; i++ {
-		Unify(lineInput, lineInput)
-		Unify(lineInput, lineInput)
+		UnifyString(lineInput, *opt)
 	}
 }

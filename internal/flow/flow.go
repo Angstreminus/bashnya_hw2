@@ -3,6 +3,7 @@ package flow
 import (
 	"strconv"
 	"strings"
+	"uniq/internal/options"
 )
 
 func GetUniqStrings(inputPrep []string) []string {
@@ -144,4 +145,14 @@ func UnifyCUD(c, u, d bool, prepStr, input []string) []string {
 		return ParamU(uniqPrepString, stringToCount, prepToInput)
 	}
 	return prepStr
+}
+
+func UnifyString(data []string, opt options.Options) []string {
+	prepStr := UnifyFSI(opt.F, opt.S, opt.I, data)
+	if !opt.C && !opt.U && !opt.D {
+		data = Unify(data, prepStr)
+	} else {
+		data = UnifyCUD(opt.C, opt.U, opt.D, prepStr, data)
+	}
+	return data
 }

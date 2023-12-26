@@ -11,6 +11,9 @@ func main() {
 	opt := options.New()
 	opt.Init()
 
+	err := options.ValidateKeys(opt.C, opt.U, opt.D)
+	errorcheck.Check(err)
+
 	inputFile, outputFile := options.ParseFilePath()
 
 	reader, err := utils.NewReader(inputFile)
@@ -22,14 +25,8 @@ func main() {
 
 	writer, err := utils.NewWriter(outputFile)
 	errorcheck.Check(err)
-	defer writer.Close()
 
-	prepStr := flow.UnifyFSI(opt.F, opt.S, opt.I, data)
-	if !opt.C && !opt.U && !opt.D {
-		data = flow.Unify(data, prepStr)
-	} else {
-		data = flow.UnifyCUD(opt.C, opt.U, opt.D, prepStr, data)
-	}
+	data = flow.UnifyString(data, *opt)
 
 	err = writer.WriteLines(data)
 	errorcheck.Check(err)
